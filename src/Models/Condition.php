@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Amethyst\Common\ConfigurableModel;
 use Railken\Lem\Contracts\EntityContract;
-use Railken\Template\Generators\TextGenerator;
+use Railken\Template\Generators\BaseGenerator;
 use Railken\Bag;
+use nicoSWD\Rules\Rule;
 
 class Condition extends Model implements EntityContract
 {
@@ -42,8 +43,11 @@ class Condition extends Model implements EntityContract
      */
     public function parse(Bag $data): string
     {
-        $generator = new TextGenerator;
+        $generator = new BaseGenerator;
+        $expression = $generator->generateAndRender($this->raw, $data->toArray());
 
-        return $generator->generateAndRender($this->raw, $data->toArray());
+        $rule = new Rule($expression, []);
+
+        return $rule->isTrue();
     }
 }
