@@ -24,8 +24,7 @@ class ConditionSchema extends Schema
             Attributes\MorphToAttribute::make('target_id')
                 ->setRelationKey('target_type')
                 ->setRelationName('target')
-                ->setRelations(app('amethyst')->getMorphRelationable('condition', 'target'))
-                ->setRequired(true),
+                ->setRelations(app('amethyst')->getMorphRelationable('condition', 'target')),
             Attributes\CreatedAtAttribute::make(),
             Attributes\UpdatedAtAttribute::make(),
             Attributes\DeletedAtAttribute::make(),

@@ -17,7 +17,7 @@ class CreateConditionsTable extends Migration
             $table->string('raw');
             $table->text('description')->nullable();
             $table->string('target_type');
-            $table->integer('target_id')->unsigned();
+            $table->integer('target_id')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
